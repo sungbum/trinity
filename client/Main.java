@@ -30,7 +30,7 @@ public class Main extends JFrame {
 	Register_Form register;
 	Room_Form room;
 	Room_Event roomEvent;
-	
+
 	// UI에 필요한 객체들
 	CardLayout card;
 	JPanel login_Pn, info_Pn, lobby_Pn, room_List_Pn, all_User_Pn, room_Btn_Pn, room_Pn, game_List_Pn, send_Pn;
@@ -61,7 +61,7 @@ public class Main extends JFrame {
 		info_Pn.add(Register_Btn = new JButton("회원가입"));
 		login_Btn.setBackground(new Color(255, 255, 255)); // 버튼 색상 조절
 		Register_Btn.setBackground(new Color(255, 255, 255));
-		
+
 		// 대기화면 카드 셋팅!
 		this.add("lobby", lobby_Pn = new JPanel(new BorderLayout(5, 0)));
 		lobby_Pn.add(room_List_Pn = new JPanel(new BorderLayout()));
@@ -88,17 +88,17 @@ public class Main extends JFrame {
 		send_Pn.add(send_Fld = new JTextField(20));
 		send_Pn.add(send_Btn = new JButton("보내기"));
 		send_Btn.setBackground(new Color(255, 255, 255));// 버튼 색상 조절
-		
+
 		// 이벤트 감지자 등록!
 		login_Btn.addActionListener(event);
 		Register_Btn.addActionListener(event);
-		
+
 		room_Add_Btn.addActionListener(event);
 		room_Join_Btn.addActionListener(event);
 		logOut_Btn.addActionListener(event);
-		
+
 		all_User_View.addMouseListener(event);
-		
+
 		all_User_View.setCellRenderer(new ListRenderer());
 		game_User_View.setCellRenderer(new ListRenderer());
 
@@ -116,22 +116,22 @@ public class Main extends JFrame {
 	public void conneted() {
 		// 서버에 연결
 		try {
-			Socket socket = new Socket(InetAddress.getLocalHost(), 7717);
+			Socket socket = new Socket("localhost", 7717);
 			thread = new Main_Thread(this, socket);
 			thread.start();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void login(String id, String ps){
 		// 로그인 기능
 		try {
 			System.out.println("login...."+id+":"+ps);
 			thread.out.writeObject(new Protocol(200, id, ps));
 			thread.out.flush();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 

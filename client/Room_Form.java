@@ -29,7 +29,7 @@ import etc.Protocol;
 import etc.User;
 import javax.swing.JOptionPane;
 
-//유저 창은 일단 생성만 해놓은 것이기 때문에 변수를 지정해야 쓸수 있어요
+//유저 창은 일단 생성만 해놓은 것이기 때문에 변수를 지정해야 쓸수 있음
 
 public class Room_Form extends JFrame implements Runnable{
 	
@@ -95,11 +95,11 @@ public class Room_Form extends JFrame implements Runnable{
     	
       
        
-    	t1_Pn.add(t1_Score_Pn=new JPanel());// 좌측 팀의 총점수를 위한 panel
-    	t1_Score_Pn.add(new JLabel("정답수"));
-    	t1_Score_Pn.add(t1_Score_Fld=new JTextField(5));
-    	t1_Score_Fld.setEnabled(false);
-    	t1_Score_Pn.setBackground(Color.white);
+    	//t1_Pn.add(t1_Score_Pn=new JPanel());// 좌측 팀의 총점수를 위한 panel
+    	//t1_Score_Pn.add(new JLabel("정답수"));
+    	//t1_Score_Pn.add(t1_Score_Fld=new JTextField(5));
+    	//t1_Score_Fld.setEnabled(false);
+    	//t1_Score_Pn.setBackground(Color.white);
        
     	t2_Pn.add(basic_p[1]=new JPanel(new BorderLayout()));
        basic_p[1].add(point_p[1]=new JPanel(),BorderLayout.SOUTH);
@@ -119,11 +119,11 @@ public class Room_Form extends JFrame implements Runnable{
        t2_2_Info_Pn.add(user_Info[3]=new JLabel("ID"));
        point_tf[3].setEnabled(false);
        
-    	t2_Pn.add(t2_Score_Pn=new JPanel());//우측 팀의 총 점수를 위한 panel
-    	t2_Score_Pn.add(new JLabel("정답수"));
-    	t2_Score_Pn.add(t2_Score_Fld=new JTextField(5));
-    	t2_Score_Fld.setEnabled(false);
-    	t2_Score_Pn.setBackground(Color.white);
+    	//t2_Pn.add(t2_Score_Pn=new JPanel());//우측 팀의 총 점수를 위한 panel
+    	//t2_Score_Pn.add(new JLabel("정답수"));
+    	//t2_Score_Pn.add(t2_Score_Fld=new JTextField(5));
+    	//t2_Score_Fld.setEnabled(false);
+    	//t2_Score_Pn.setBackground(Color.white);
         
        
     	this.add(south_Pn=new JPanel(),BorderLayout.SOUTH);//창 하단에 채팅필드를 위한 panel
@@ -290,14 +290,13 @@ public class Room_Form extends JFrame implements Runnable{
             
         }
         public void giveCap(){//방장권한 주기
-            can.removeMouseMotionListener(roomEvent);//그림 그릴수 있는 권한 없애기
+           can.removeMouseMotionListener(roomEvent);//그림 그릴수 있는 권한 없애기
            game_start_btn.removeActionListener(roomEvent);//스타트 버튼 사용 불가
            ready_btn.addActionListener(roomEvent);//레디버튼 사용 가능
-            answer_Lab.setText("");
-            send_Fld.setEnabled(true);
+           answer_Lab.setText("");
+           send_Fld.setEnabled(true);
         }
 
-    @Override
     public void run() {// 시간 스레드
         bk: while(time>0){
            if(time_bb==true){// 게임을 시작했을 때

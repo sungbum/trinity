@@ -27,6 +27,7 @@ public class Register_Form extends JDialog{
 		// 하단부 셋팅!
 		this.add(south_pn = new JPanel(), BorderLayout.SOUTH);
 		south_pn.add(register_btn = new JButton("등록"));
+		
 		// 중심부 셋팅!
 		this.add(center_pn = new JPanel(new GridLayout(6, 1)));
 		for (int i = 0; i < info_pn.length; i++) {

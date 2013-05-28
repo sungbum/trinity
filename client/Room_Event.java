@@ -21,21 +21,22 @@ public class Room_Event extends KeyAdapter implements ActionListener, MouseMotio
 	Room_Form room;
 	Room_Canvas can;
 	Main_Thread thread;
-        boolean r_bb;
-	public Room_Event(Main client, Room_Form room, Room_Canvas can,Main_Thread thread) {
+    boolean r_bb;
+	
+    public Room_Event(Main client, Room_Form room, Room_Canvas can,Main_Thread thread) {
 		this.client = client;
 		this.room = room;
 		this.can = can;
-                this.thread=thread;
-                room.addWindowListener(new WindowAdapter() {
+        this.thread=thread;
+        room.addWindowListener(new WindowAdapter() {
 
-			@Override
-			public void windowClosing(WindowEvent e) {
-				// 프로그램 종료 기능
-				if (Room_Event.this.client.thread != null) {
-					try {
-						Room_Event.this.client.thread.out.writeObject(new Protocol(350));
-						Room_Event.this.client.thread.out.flush();
+		public void windowClosing(WindowEvent e) {
+	
+			// 프로그램 종료 기능
+			if (Room_Event.this.client.thread != null) {
+				try {
+					Room_Event.this.client.thread.out.writeObject(new Protocol(350));
+					Room_Event.this.client.thread.out.flush();
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
@@ -44,7 +45,7 @@ public class Room_Event extends KeyAdapter implements ActionListener, MouseMotio
 		});
 	}
 
-	@Override
+
 	public void keyPressed(KeyEvent e) {
 		if (e.getSource() == room.send_Fld) {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -54,7 +55,6 @@ public class Room_Event extends KeyAdapter implements ActionListener, MouseMotio
 		}
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == room.room_Exit_Btn) {
 			// 방 나가기 버튼을 클릭했을 시
@@ -133,7 +133,6 @@ public class Room_Event extends KeyAdapter implements ActionListener, MouseMotio
                 }
 	}
 
-	@Override
 	public void mouseDragged(MouseEvent e) {
 		// 캔버스에서 마우스를 드래그했을 시 작동
 		if (e.getSource() == can) {
@@ -141,7 +140,6 @@ public class Room_Event extends KeyAdapter implements ActionListener, MouseMotio
 		}
 	}
 
-	@Override
 	public void mouseMoved(MouseEvent e) {
 		// 사용 안함
 	}

@@ -16,8 +16,7 @@ public class GameServer extends Thread {
 	ArrayList<GameRoom> roomList; // 게임방 리스트가 저장되는 곳
 	HashMap<String, User> db;
 	ServerSocket server;
-	
-	
+
 	public GameServer() {
 		try {
 			server = new ServerSocket(7717);				//지정된 포트에 바인드 되고 있는 서버소켓을 돌려줌

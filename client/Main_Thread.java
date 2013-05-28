@@ -21,25 +21,26 @@ import server.CopyClient;
 public class Main_Thread extends Thread {
 	Main client;
 	Socket socket;
-        String q;
+    String q;
 	ObjectInputStream in;
 	ObjectOutputStream out;
-        int useridx;
-        User user;
-	public Main_Thread(Main client, Socket socket) {
-		this.client = client;
-		this.socket = socket;
+    
+	int useridx;
+    User user;
+	
+    public Main_Thread(Main client, Socket socket) {
+	this.client = client;
+	this.socket = socket;
 
-		try {
+	try {
 			in = new ObjectInputStream(socket.getInputStream());
 			out = new ObjectOutputStream(socket.getOutputStream());
-		} catch (IOException e) {
+	}catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	@Override
 	public void run() {
 		bk: while (true) {
 			try {
@@ -145,7 +146,7 @@ public class Main_Thread extends Thread {
                                         boolean bb=true;//방장 확인
 					client.room = new Room_Form(client,bb);
                                         client.room.getCap();
-                                        client.room.setTitle("방장");
+                                        client.room.setTitle("CatchMind");
 					client.card.show(client.getContentPane(), "room");
 					client.setVisible(false);
 					break;

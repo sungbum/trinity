@@ -21,7 +21,7 @@ public class Register_Event implements ActionListener {
 		this.client = client;
 	}
 
-	@Override
+
 	public void actionPerformed(ActionEvent e) {
 		// 중복체크 버튼을 클릭시 작동
 		if (e.getSource() == form.check_btn) {

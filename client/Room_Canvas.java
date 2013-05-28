@@ -26,7 +26,6 @@ public class Room_Canvas extends Canvas{
         color = Color.BLACK;
     }
     
-    @Override
     public void paint(Graphics g) {
          g.setColor(color);
          g.fillOval(point.x-(g_Size/2), point.y-(g_Size/2), g_Size, g_Size );
@@ -55,7 +54,6 @@ public class Room_Canvas extends Canvas{
 	}
 
 
-	@Override
     public void update(Graphics g) {
         paint(g);
     }

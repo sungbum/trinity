@@ -20,7 +20,7 @@ public class Message_Event implements ActionListener {
 		this.toUser = toUser; // 수정해야 함
 		
 	}
-	@Override
+
 	public void actionPerformed(ActionEvent e) {
 		// 쪽지 보내기 버튼을 클릭했을 시
 		if(e.getSource() == m_Form.send_Btn)

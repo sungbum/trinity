@@ -17,7 +17,6 @@ public class ListRenderer extends DefaultListCellRenderer{
 		online = new ImageIcon("src/images/user_online.png");
 	}
 	
-	@Override
 	// List의 요소만큼 불러오는 메서드
 	public Component getListCellRendererComponent(JList list, Object value,
 			int index, boolean isSelected, boolean cellHasFocus) {
