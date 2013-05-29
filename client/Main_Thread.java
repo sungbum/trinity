@@ -195,15 +195,16 @@ public class Main_Thread extends Thread {
                                 case 1200://정답시
                                     JOptionPane.showMessageDialog(client.room, "정답");
                                     client.room.time_bb=false;//시간 스레드 멈추기
-                                    client.room.time=60;//시간 0으로 셋팅
+                                    client.room.time=180;//시간 0으로 셋팅
                                     client.room.area[useridx].setText("");
                                     client.room.area[useridx].setBackground(Color.white);
                                     client.room.canvasClear();//기존의 그림 지우기
                                     break;
                                 case 1250://방장권한 주기
-                                    
+                                  
                                    client.room.giveCap();
                                     break;
+                                    
                                 case 1300://레디버튼
                                     int r_idx=ptc.getRoomUserIdx();
                                      if(ptc.isBb()==true){//레디 했을때의 세팅

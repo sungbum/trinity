@@ -9,6 +9,7 @@ import etc.Protocol;
 import etc.User;
 import java.io.Serializable;
 
+
 public class CopyClient extends Thread implements Serializable{
 
 	// 접속자의 정보를 의미하는 객체들
@@ -100,12 +101,12 @@ public class CopyClient extends Thread implements Serializable{
                                             for(int i=0;i<currentRoom.roomUserInfo.size();i++){//이전 방장에게 보낸다.
                                                 
                                                 if(currentRoom.roomUserInfo.get(i).equals(currentRoom.roomcap)){
-                                                    currentRoom.roomUserList.get(i).out.writeObject(new Protocol(1250,false));
+                                                    currentRoom.roomUserList.get(i).out.writeObject(new Protocol(1100,false));
                                                     out.flush();
                                                     break;
                                                 }
                                             }
-                                            currentRoom.roomcap=user;
+                                            currentRoom.roomcap= user;
                                             currentRoom.question=null;
                                             currentRoom.SendProtocol(new Protocol(1200));
                                             out.writeObject(new Protocol(1350, true));
@@ -143,7 +144,7 @@ public class CopyClient extends Thread implements Serializable{
 					// 전달받은 방의 위치를 서버에서 검색
 					currentRoom = server.checkRoom(roomIdx);
 					
-					// 방 접속자가 초과(4명)하기 않았을 경우에만 진행
+					// 방 접속자가 초과(4명)하지 않았을 경우에만 진행
 					if (currentRoom.getUserCount() < 4 ) {
 						System.out.println("roomUser..:"+currentRoom.getUserCount());
 						out.writeObject(new Protocol(750));

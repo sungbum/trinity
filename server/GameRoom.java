@@ -175,11 +175,11 @@ public class GameRoom implements Serializable{
 	}
 	// 게임 시작 기능
 	public void startGame(){
-		gameCount++;					//게임 카운트 증가
+		gameCount++;				//게임 카운트 증가
 		answer = this.setQuestion();	//게임의 정답을 문제로 초기화
 		System.out.println("GameStart...Count:"+gameCount+", Answer:"+answer);
 		Game_Data g_Data = new Game_Data(gameCount, answer);		//Game_Data형 변수 g_Data생성
-		//this.SendProtocol(new Protocol(1100, g_Data));
+		this.SendProtocol(new Protocol(1100, g_Data));
 	}
         
         public void ready(CopyClient client){

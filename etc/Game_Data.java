@@ -9,7 +9,7 @@ public class Game_Data implements Serializable{
 	
 	//생성자 메소드
 	public Game_Data(int gameCount, String gameAnswer) {
-		this.gameCount = gameCount;
+		this.gameCount=gameCount;
 		this.gameAnswer = gameAnswer;
 	}
 
