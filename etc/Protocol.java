@@ -103,7 +103,7 @@ public class Protocol implements Serializable{
 		this.ptc = ptc;
 		this.userInfo = userInfo;
 		this.msg = msg;
-                this.copylist=copylist;
+		//this.copylist = copylist;
                 
 	}
        //레디한 유저 얻는 생성자

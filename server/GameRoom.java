@@ -12,11 +12,15 @@ public class GameRoom implements Serializable{
 	GameServer server;					// GameServer 클래스 타입 server선언
 	ArrayList<CopyClient> roomUserList; // 대화방 접속자들이 저장 되는 곳
 	ArrayList<User> roomUserInfo; 		// 대화방 접속자들의 정보가 저장 되는 곳
-	ArrayList<CopyClient> t1_UserList;  // 1팀 접속자들이 저장 되는 곳
-	ArrayList<User> t1_UserInfo; 		// 1팀 접속자들의 정보가 저장되는 곳
-	ArrayList<CopyClient> t2_UserList;  // 1팀 접속자들이 저장 되는 곳
-	ArrayList<User> t2_UserInfo; 		// 2팀 접속자들의 정보가 저장되는 곳
-    ArrayList<CopyClient> ready_list;	// ready한 user를 담기 위한 곳
+	ArrayList<CopyClient> t1_UserList;  // 접속자1이 저장 되는 곳
+	ArrayList<User> t1_UserInfo; 		// 접속자1의 정보가 저장되는 곳
+	ArrayList<CopyClient> t2_UserList;  // 접속자2가 저장 되는 곳
+	ArrayList<User> t2_UserInfo; 		// 접속자2의 정보가 저장되는 곳
+	ArrayList<CopyClient> t3_UserList;  // 접속자3이 저장 되는 곳
+	ArrayList<User> t3_UserInfo; 		// 접속자3의 정보가 저장되는 곳
+	ArrayList<CopyClient> t4_UserList;  // 접속자4가 저장 되는 곳
+	ArrayList<User> t4_UserInfo; 		// 접속자4의 정보가 저장되는 곳	
+	ArrayList<CopyClient> ready_list;	// ready한 user를 담기 위한 곳
 	int gameCount; 			// 게임의 카운트
 	String answer; 			// 게임의 정답
     String question;		// 문제
@@ -28,10 +32,14 @@ public class GameRoom implements Serializable{
 		
 		roomUserList = new ArrayList<CopyClient>();	// 대화방 접속자들이 저장 되는 곳
 		roomUserInfo = new ArrayList<User>();		// 대화방 접속자들의 정보가 저장 되는 곳
-		t1_UserInfo = new ArrayList<User>();		// 1팀 접속자들이 저장 되는 곳
-		t1_UserList = new ArrayList<CopyClient>();	// 1팀 접속자들의 정보가 저장되는 곳
-		t2_UserInfo = new ArrayList<User>();		// 2팀 접속자들이 저장 되는 곳
-		t2_UserList = new ArrayList<CopyClient>();	// 2팀 접속자들의 정보가 저장되는 곳
+		t1_UserInfo = new ArrayList<User>();		// 접속자1이 저장 되는 곳
+		t1_UserList = new ArrayList<CopyClient>();	// 접속자1의 정보가 저장되는 곳
+		t2_UserInfo = new ArrayList<User>();		// 접속자2가 저장 되는 곳
+		t2_UserList = new ArrayList<CopyClient>();	// 접속자2의 정보가 저장되는 곳
+		t3_UserInfo = new ArrayList<User>();		// 접속자3이 저장 되는 곳
+		t3_UserList = new ArrayList<CopyClient>();	// 접속자3의 정보가 저장되는 곳
+		t4_UserInfo = new ArrayList<User>();		// 접속자4가 저장 되는 곳
+		t4_UserList = new ArrayList<CopyClient>();	// 접속자4의 정보가 저장되는 곳
 		ready_list = new ArrayList<CopyClient>();	// ready한 user를 담기 위한 곳	
 	}
 	
@@ -89,38 +97,58 @@ public class GameRoom implements Serializable{
 			break;
 		//team 3에 배분
 		case 3:
-			t1_UserList.add(client);			//1팀에 접속자 추가
-			t1_UserInfo.add(client.user);		//1팀에 접속자 정보 추가
-			System.out.println("TeamSet..t1");
+			t3_UserList.add(client);			//1팀에 접속자 추가
+			t3_UserInfo.add(client.user);		//1팀에 접속자 정보 추가
+			System.out.println("TeamSet..t3");
 			break;
 		//team 4에 배분
 		case 4:
-			t2_UserList.add(client);			//2팀에 접속자 추가
-			t2_UserInfo.add(client.user);		//2팀에 접속자 정보 추가
-			System.out.println("TeamSet..t2");
+			t4_UserList.add(client);			//2팀에 접속자 추가
+			t4_UserInfo.add(client.user);		//2팀에 접속자 정보 추가
+			System.out.println("TeamSet..t4");
 			break;
 		}
 	}
-	// 종료시 팀에서 나가기
+	// 종료시 사용자에서 나가기
 	public void removeTeamUser(CopyClient client){
 		System.out.println("TeamSet..remove..");
 		
-		if (t1_UserList.size() != 0) {					//1팀의 리스트가 0이 아닐 경우
+		if (t1_UserList.size() != 0) {					//1의 리스트가 0이 아닐 경우
 			for (CopyClient user : t1_UserList) {
 				if (user == client){
 					System.out.println("TeamSet..t1..");
-					t1_UserList.remove(client);			//1팀에서 사용자 삭제
-					t1_UserInfo.remove(client.user);	//1팀에서 사용자 정보 삭제
+					t1_UserList.remove(client);			//1에서 사용자 삭제
+					t1_UserInfo.remove(client.user);	//1에서 사용자 정보 삭제
 					break;
 					}
 			}
 		}
-		if (t2_UserList.size() != 0) {					//2팀의 리스트가 0이 아닐 경우
+		if (t2_UserList.size() != 0) {					//2의 리스트가 0이 아닐 경우
 			for (CopyClient user : t2_UserList) {
 				if (user == client){
 					System.out.println("TeamSet..t2..");
-					t2_UserList.remove(client);			//2팀에서 사용자 삭제
-					t2_UserInfo.remove(client.user);	//2팀에서 사용자 정보 삭제
+					t2_UserList.remove(client);			//2에서 사용자 삭제
+					t2_UserInfo.remove(client.user);	//2에서 사용자 정보 삭제
+					break;
+					}
+			}
+		}
+		if (t3_UserList.size() != 0) {					//3의 리스트가 0이 아닐 경우
+			for (CopyClient user : t3_UserList) {
+				if (user == client){
+					System.out.println("TeamSet..t3..");
+					t3_UserList.remove(client);			//3에서 사용자 삭제
+					t3_UserInfo.remove(client.user);	//3에서 사용자 정보 삭제
+					break;
+					}
+			}
+		}
+		if (t4_UserList.size() != 0) {					//4의 리스트가 0이 아닐 경우
+			for (CopyClient user : t4_UserList) {
+				if (user == client){
+					System.out.println("TeamSet..t4..");
+					t4_UserList.remove(client);			//4에서 사용자 삭제
+					t4_UserInfo.remove(client.user);	//4에서 사용자 정보 삭제
 					break;
 					}
 			}
@@ -164,7 +192,10 @@ public class GameRoom implements Serializable{
 	// 문제를 뽑는 기능
 	public String setQuestion(){
 		String[] question = {
-					"사과", "바나나", "딸기", "수박", "포도", "당근", "메론","시계","토끼","호랑이","알로에","휴대폰","아기"};
+					"사과", "바나나", "딸기", "수박", "포도", "당근", "메론","시계","토끼","호랑이"
+					,"알로에","휴대폰","아기","63빌딩","발냄새","가격표","가계부","가락국수","가수"
+					,"가스레인지","가오리","가위","가위바위보","가죽가방","가지","간장게장","갈비살"
+					,"감옥","감자튀김","강강술래","강남스타일","강아지","개미","거위","검도","견인자동차"};
 			
 		int choic = (int) (Math.random()*question.length);   //문제를 랜덤하게 고름
 		return question[choic];								 //문제 반환
