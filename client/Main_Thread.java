@@ -21,25 +21,26 @@ import server.CopyClient;
 public class Main_Thread extends Thread {
 	Main client;
 	Socket socket;
-        String q;
+    String q;
 	ObjectInputStream in;
 	ObjectOutputStream out;
-        int useridx;
-        User user;
-	public Main_Thread(Main client, Socket socket) {
-		this.client = client;
-		this.socket = socket;
+    
+	int useridx;
+    User user;
+	
+    public Main_Thread(Main client, Socket socket) {
+	this.client = client;
+	this.socket = socket;
 
-		try {
+	try {
 			in = new ObjectInputStream(socket.getInputStream());
 			out = new ObjectOutputStream(socket.getOutputStream());
-		} catch (IOException e) {
+	}catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	@Override
 	public void run() {
 		bk: while (true) {
 			try {
@@ -157,7 +158,7 @@ public class Main_Thread extends Thread {
                                          boolean bb1=false;//접속 유저 확인
 					System.out.println("roomJoin : OK!!");
 					client.room = new Room_Form(client,bb1);
-                                        client.room.giveCap();
+                    client.room.giveCap();
 					client.card.show(client.getContentPane(), "room");
 					client.setVisible(false);
 					break;
@@ -201,21 +202,19 @@ public class Main_Thread extends Thread {
                                     client.room.canvasClear();//기존의 그림 지우기
                                     break;
                                 case 1250://방장권한 주기
-                                  
-                                   client.room.giveCap();
-                                    break;
                                     
+                                    client.room.giveCap();
+                                    break;
                                 case 1300://레디버튼
                                     int r_idx=ptc.getRoomUserIdx();
                                      if(ptc.isBb()==true){//레디 했을때의 세팅
                                          
                                         client.room.area[r_idx].setText("READY!");
-                                        client.room.area[r_idx].setBackground(Color.red);
-                                        
+                                        client.room.area[r_idx].setBackground(Color.red);                                        
                                     }
                                     else{//레디 안했을 때의 세팅
                                           
-                                         client.room.area[r_idx].setText("");
+                                        client.room.area[r_idx].setText("");
                                         client.room.area[r_idx].setBackground(Color.white);
                                         
                                     }
@@ -227,13 +226,14 @@ public class Main_Thread extends Thread {
                                    client.thread.out.writeObject(new Protocol(1500,String.valueOf(client.room.point)));
                                    client.thread.out.flush();       //자신의 점수를 String으로 변환해서 서버 보내기
                                     break;
+                                    
                                 case 1400://게임이 시작하는 순간 각 유저들의 Area를 비워준다.
                                     client.room.time_bb=true;//시간 스레드 시작 가능하게 만듬
                                     client.room.thread=new Thread(client.room);
                                     client.room.thread.start();//시간 스레드 시작
                                     client.room.count_Lab.setText("게임시작");
                                     for(int i=0;i<client.roomUserInfo.length;i++){//자신의 창의 각 유저들의 말 칸 비우기
-                                     client.room.area[i].setText("");
+                                    client.room.area[i].setText("");
                                     client.room.area[i].setBackground(Color.white);
                                     }
                                     break;
@@ -243,12 +243,12 @@ public class Main_Thread extends Thread {
                                      client.room.area[i].setText("");
                                     client.room.area[i].setBackground(Color.white);
                                     }
-                                   
                                     break;
+                                    
                                 case 1500:
                                     client.room.point_tf[ptc.getRoomUserIdx()].setText(ptc.getMsg());//정답을 맞춘 유저 점수 올리기
                                     break;
-                                    
+                                
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

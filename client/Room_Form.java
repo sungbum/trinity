@@ -47,7 +47,7 @@ public class Room_Form extends JFrame implements Runnable{
     JLabel[] user_Info = new JLabel[4];
     JTextArea[] area = new JTextArea[4];
     JButton red_Btn,gray_Btn,black_Btn,green_Btn,blue_Btn,eraser_Btn,reset_Btn, send_Btn, room_Exit_Btn,game_start_btn,ready_btn;
-    int point=0,time=180;
+    int point=0, time=180;
     Thread thread;
     JLabel time_jl;
     public Room_Form(Main client,boolean bb) {
@@ -92,7 +92,7 @@ public class Room_Form extends JFrame implements Runnable{
        t1_2_Info_Pn.add(area[2]=new JTextArea());        
        point_tf[2].setEnabled(false);
        
-  
+       
     	t2_Pn.add(basic_p[1]=new JPanel(new BorderLayout()));
        basic_p[1].add(point_p[1]=new JPanel(),BorderLayout.SOUTH);
        point_p[1].add(new JLabel("POINT"));
@@ -110,7 +110,7 @@ public class Room_Form extends JFrame implements Runnable{
        t2_2_Info_Pn.add(area[3]=new JTextArea());
        t2_2_Info_Pn.add(user_Info[3]=new JLabel("ID"));
        point_tf[3].setEnabled(false);
-    
+
        
     	this.add(south_Pn=new JPanel(),BorderLayout.SOUTH);//창 하단에 채팅필드를 위한 panel
     	south_Pn.add(new JLabel("CHAT"));
@@ -124,6 +124,7 @@ public class Room_Form extends JFrame implements Runnable{
     	center_Pn.add(color_Pn=new JPanel(new GridLayout(9,1,0,5)),BorderLayout.WEST);//좌측에 색상버튼을 올리기 위한 panel
     	center_Pn.setBackground(Color.white);
 
+    	//펜 색깔 버튼
     	color_Pn.add(red_Btn=new JButton());
     	red_Btn.setBackground(Color.red);
 
@@ -148,7 +149,7 @@ public class Room_Form extends JFrame implements Runnable{
        	can_Lab.add(can);
        
        	can.setBounds(56,41, 503, 422);//캔버스 크기 조정
-       	can.setBackground(Color.white);//캔버스색깔
+       	can.setBackground(Color.yellow);
        	
        	// Area 셋팅!
        	for (JTextArea a : area) {
@@ -270,15 +271,15 @@ public class Room_Form extends JFrame implements Runnable{
 	}
         public void getCap(){//방장권한 얻기
             can.addMouseMotionListener(roomEvent);//그림을 그릴수 있게 함
-          game_start_btn.addActionListener(roomEvent);//스타트 버튼 사용 가능
-           ready_btn.removeActionListener(roomEvent);//레디 버튼 액션 지우기
+            game_start_btn.addActionListener(roomEvent);//스타트 버튼 사용 가능
+            ready_btn.removeActionListener(roomEvent);//레디 버튼 액션 지우기
             answer_Lab.setText("");//정답 칸 세팅
             
         }
         public void giveCap(){//방장권한 주기
            can.removeMouseMotionListener(roomEvent);//그림 그릴수 있는 권한 없애기
-          game_start_btn.removeActionListener(roomEvent);//스타트 버튼 사용 불가
-          ready_btn.addActionListener(roomEvent);//레디버튼 사용 가능
+           game_start_btn.removeActionListener(roomEvent);//스타트 버튼 사용 불가
+           ready_btn.addActionListener(roomEvent);//레디버튼 사용 가능
            answer_Lab.setText("");
            send_Fld.setEnabled(true);
         }

@@ -4,9 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,7 +37,7 @@ public class Main extends JFrame {
 	Register_Form register;
 	Room_Form room;
 	Room_Event roomEvent;
-	
+
 	// UI에 필요한 객체들
 	CardLayout card;
 	JPanel login_Pn, info_Pn, lobby_Pn, room_List_Pn, all_User_Pn, room_Btn_Pn, room_Pn, game_List_Pn, send_Pn;
@@ -44,7 +51,6 @@ public class Main extends JFrame {
 	String[] roomList;
         CopyClient[] copy;
 	public Main() {
-		
 		event = new Main_Event(this);
 		conneted(); // 서버에 접속
 
@@ -62,7 +68,7 @@ public class Main extends JFrame {
 		info_Pn.add(Register_Btn = new JButton("회원가입"));
 		login_Btn.setBackground(new Color(255, 255, 255)); // 버튼 색상 조절
 		Register_Btn.setBackground(new Color(255, 255, 255));
-		
+
 		// 대기화면 카드 셋팅!
 		this.add("lobby", lobby_Pn = new JPanel(new BorderLayout(5, 0)));
 		lobby_Pn.add(room_List_Pn = new JPanel(new BorderLayout()));
@@ -89,17 +95,17 @@ public class Main extends JFrame {
 		send_Pn.add(send_Fld = new JTextField(20));
 		send_Pn.add(send_Btn = new JButton("보내기"));
 		send_Btn.setBackground(new Color(255, 255, 255));// 버튼 색상 조절
-		
+
 		// 이벤트 감지자 등록!
 		login_Btn.addActionListener(event);
 		Register_Btn.addActionListener(event);
-		
+
 		room_Add_Btn.addActionListener(event);
 		room_Join_Btn.addActionListener(event);
 		logOut_Btn.addActionListener(event);
-		
+
 		all_User_View.addMouseListener(event);
-		
+
 		all_User_View.setCellRenderer(new ListRenderer());
 		game_User_View.setCellRenderer(new ListRenderer());
 
@@ -110,8 +116,15 @@ public class Main extends JFrame {
 		this.setVisible(true);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
 		new Main();
+		//
+		AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("src/bgm/0.wav"));
+        Clip clip = AudioSystem.getClip();
+        clip.open(inputStream);
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        Thread.sleep(10000); // looping as long as this thread is alive
+        // 배경음악
 	}
 
 	public void conneted() {
@@ -120,19 +133,19 @@ public class Main extends JFrame {
 			Socket socket = new Socket("localhost", 7717);
 			thread = new Main_Thread(this, socket);
 			thread.start();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void login(String id, String ps){
 		// 로그인 기능
 		try {
 			System.out.println("login...."+id+":"+ps);
 			thread.out.writeObject(new Protocol(200, id, ps));
 			thread.out.flush();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 

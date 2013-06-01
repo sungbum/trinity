@@ -71,7 +71,6 @@ public class Main_Event extends MouseAdapter implements ActionListener{
 		}
 	}
 
-	@Override
 	public void mouseClicked(MouseEvent e) {
 		// 전체 접속자 리스트에 마우스 오른쪽 클릭 했을 시 작동
 		if (e.getSource() == client.all_User_View && e.getButton() == 3) {

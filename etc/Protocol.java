@@ -2,6 +2,7 @@ package etc;
 
 import java.io.Serializable;
 import server.CopyClient;
+
 import server.GameRoom;
 
 public class Protocol implements Serializable{
@@ -122,7 +123,7 @@ public class Protocol implements Serializable{
 		this.m_Data = m_Data;
 	} 
 	public Protocol(int ptc, Game_Data g_Data){
-		// 게임의 시작을 전달하는 생성자
+		// 게임을 시작을 전달하는 생성자
 		this.ptc = ptc;
 		this.g_Data = g_Data;
 	}

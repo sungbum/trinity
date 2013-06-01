@@ -15,7 +15,7 @@ public class GameRoom implements Serializable{
 	ArrayList<CopyClient> t1_UserList;  // 접속자1이 저장 되는 곳
 	ArrayList<User> t1_UserInfo; 		// 접속자1의 정보가 저장되는 곳
 	ArrayList<CopyClient> t2_UserList;  // 접속자2가 저장 되는 곳
-	ArrayList<User> t2_UserInfo; 		// 접속자2의 정보가 저장되는 곳
+	ArrayList<User> t2_UserInfo; 		// 접속자2의 정보가 저장되는 곳 
 	ArrayList<CopyClient> t3_UserList;  // 접속자3이 저장 되는 곳
 	ArrayList<User> t3_UserInfo; 		// 접속자3의 정보가 저장되는 곳
 	ArrayList<CopyClient> t4_UserList;  // 접속자4가 저장 되는 곳
@@ -175,7 +175,7 @@ public class GameRoom implements Serializable{
 	}
 	// 게임 시작 기능
 	public void startGame(){
-		gameCount++;				//게임 카운트 증가
+		gameCount++;					//게임 카운트 증가
 		answer = this.setQuestion();	//게임의 정답을 문제로 초기화
 		System.out.println("GameStart...Count:"+gameCount+", Answer:"+answer);
 		Game_Data g_Data = new Game_Data(gameCount, answer);		//Game_Data형 변수 g_Data생성
@@ -211,5 +211,4 @@ public class GameRoom implements Serializable{
 		return roomUserList.size();
 	}
        
-	
 }

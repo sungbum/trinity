@@ -9,7 +9,6 @@ import etc.Protocol;
 import etc.User;
 import java.io.Serializable;
 
-
 public class CopyClient extends Thread implements Serializable{
 
 	// 접속자의 정보를 의미하는 객체들
@@ -33,7 +32,6 @@ public class CopyClient extends Thread implements Serializable{
 		}
 	}
 
-	@Override
 	public void run() {
 		// 스레드가 해야할 일들
 		bk : while(true) {
@@ -98,16 +96,17 @@ public class CopyClient extends Thread implements Serializable{
 					currentRoom.SendMessage(new Protocol(400, user, ptc.getMsg()));
                                         if(ptc.getMsg().equals(currentRoom.question)){//정답과 같을 경우
                                             
-                                            for(int i=0;i<currentRoom.roomUserInfo.size();i++){//이전 방장에게 보낸다.
+                                            for(int i=0;i<currentRoom.roomUserInfo.size(); i++){//이전 방장에게 보낸다.
                                                 
-                                                if(currentRoom.roomUserInfo.get(i).equals(currentRoom.roomcap)){
-                                                    currentRoom.roomUserList.get(i).out.writeObject(new Protocol(1100,false));
-                                                    out.flush();
-                                                    break;
+                                            	if(currentRoom.roomUserInfo.get(i).equals(currentRoom.roomcap)){
+                                                   currentRoom.roomUserList.get(i).out.writeObject(new Protocol(1250, false));
+                                                   out.flush();
+                                                   break;
+                        
                                                 }
                                             }
-                                            currentRoom.roomcap= user;
-                                            currentRoom.question=null;
+                 
+                                            currentRoom.question = null;
                                             currentRoom.SendProtocol(new Protocol(1200));
                                             out.writeObject(new Protocol(1350, true));
                                         }
@@ -144,7 +143,7 @@ public class CopyClient extends Thread implements Serializable{
 					// 전달받은 방의 위치를 서버에서 검색
 					currentRoom = server.checkRoom(roomIdx);
 					
-					// 방 접속자가 초과(4명)하지 않았을 경우에만 진행
+					// 방 접속자가 초과(4명)하기 않았을 경우에만 진행
 					if (currentRoom.getUserCount() < 4 ) {
 						System.out.println("roomUser..:"+currentRoom.getUserCount());
 						out.writeObject(new Protocol(750));
@@ -221,13 +220,14 @@ public class CopyClient extends Thread implements Serializable{
                                         break;
                                     else if(currentRoom.roomUserList.size()-1==currentRoom.ready_list.size())//방장 자신을 제외한 인원수가 레디 인원수와 같다면
                                         currentRoom.question=currentRoom.setQuestion();//문제 생성
-					out.writeObject(new Protocol(1100,currentRoom.question));//방장에게 문제 출제
-                                         out.flush();
-                                         currentRoom.SendProtocol(new Protocol(1400));//시작 메세지 전달
-                                         currentRoom.ready_list.removeAll(currentRoom.ready_list);
+                                    	out.writeObject(new Protocol(1100,currentRoom.question));//방장에게 문제 출제
+                                        out.flush();
+                                        currentRoom.SendProtocol(new Protocol(1400));//시작 메세지 전달
+                                        currentRoom.ready_list.removeAll(currentRoom.ready_list);
                                          
-                                         currentRoom.ready_list.trimToSize();
-                                         System.out.println("게임시작");
+                                        currentRoom.ready_list.trimToSize();
+                                        System.out.println("게임시작");
+                                        
                                         break;
                                
 				
